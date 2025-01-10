@@ -1,21 +1,30 @@
 const express = require('express');
-const db = require('../database/db');
 const router = express.Router();
 
-router.get('/', (req, res) => res.render('budget'));
+router.get('/', (req, res) => {
+    res.render('budget', { title: 'Budget Planner', income: null });
+});
 
 router.post('/', (req, res) => {
     const { income, debitOrders, currentExpenses, rent } = req.body;
+
     const totalExpenses = parseFloat(debitOrders) + parseFloat(currentExpenses) + parseFloat(rent);
-    const disposableIncome = parseFloat(income) - totalExpenses;
+    const disposableIncome = income - totalExpenses;
 
-    const advice = disposableIncome < 0 
-        ? 'Reduce expenses and review your debit orders.'
-        : disposableIncome < 1000 
-        ? 'Focus on saving more or reducing unnecessary costs.'
-        : 'Your finances are in a good state! Consider investments or savings.';
+    let advice = 'Manage your expenses wisely.';
+    if (disposableIncome < 0) {
+        advice = 'Your expenses exceed your income. Consider reducing unnecessary costs.';
+    } else if (disposableIncome < income * 0.2) {
+        advice = 'Try saving at least 20% of your income.';
+    }
 
-    res.render('budget', { income, totalExpenses, disposableIncome, advice });
+    res.render('budget', {
+        title: 'Budget Planner',
+        income,
+        totalExpenses,
+        disposableIncome,
+        advice,
+    });
 });
 
 module.exports = router;

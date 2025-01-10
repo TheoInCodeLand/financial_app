@@ -1,0 +1,12 @@
+<%- include('layouts/layout', { title: 'Investment Opportunities' }) %>
+<section>
+    <h1>Investment Opportunities</h1>
+    <ul>
+        <% investments.forEach(investment => { %>
+            <li>
+                <h2><%= investment.name %></h2>
+                <p><%= investment.description %></p>
+            </li>
+        <% }) %>
+    </ul>
+</section>

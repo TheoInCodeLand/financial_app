@@ -1,0 +1,27 @@
+<%- include('layouts/layout', { title: 'Budget Planner' }) %>
+<section>
+    <h1>Budget Planner</h1>
+    <form action="/budget" method="POST">
+        <label for="income">Monthly Income:</label>
+        <input type="number" name="income" required>
+
+        <label for="debitOrders">Debit Orders:</label>
+        <input type="number" name="debitOrders" required>
+
+        <label for="currentExpenses">Current Expenses:</label>
+        <input type="number" name="currentExpenses" required>
+
+        <label for="rent">Rent:</label>
+        <input type="number" name="rent" required>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    <% if (income) { %>
+        <h2>Results</h2>
+        <p>Income: R<%= income %></p>
+        <p>Total Expenses: R<%= totalExpenses %></p>
+        <p>Disposable Income: R<%= disposableIncome %></p>
+        <p><strong>Advice:</strong> <%= advice %></p>
+    <% } %>
+</section>

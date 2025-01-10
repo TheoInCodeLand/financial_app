@@ -1,0 +1,10 @@
+<%- include('layouts/layout', { title: 'Dashboard' }) %>
+<section>
+    <h1>Welcome, <%= user.username %>!</h1>
+    <p>What would you like to do today?</p>
+    <ul>
+        <li><a href="/budget">Plan your Budget</a></li>
+        <li><a href="/investments">Explore Investments</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</section>
